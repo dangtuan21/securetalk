@@ -1,9 +1,9 @@
-import { AppContextProvider } from "./State";
-import View from "./View";
+import { AppContextProvider } from "./core/State";
+import AppView from "./AppView";
 function App() {
   return (
     <AppContextProvider>
-      <View />
+      <AppView />
     </AppContextProvider>
   );
 }

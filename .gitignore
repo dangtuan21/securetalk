@@ -68,3 +68,4 @@ build
 
 read.txt
 .DS_Store
+src/api/db_config.json

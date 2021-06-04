@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "./State";
+import { AppContext } from "./core/State";
 import { Redirect, Route, Switch } from "react-router-dom";
 import {
   IonApp,
@@ -17,10 +17,10 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import ChatTab from "./pages/ChatTab";
-import Tab2 from "./pages/Tab2";
-import Tab3 from "./pages/Tab3";
-import Login from "./Login";
-import "./View.css";
+// import Tab2 from "./pages/Tab2";
+// import Tab3 from "./pages/Tab3";
+import Login from "./pages/Login";
+import "./theme/style.css";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -41,9 +41,8 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import ChatPage from "./pages/ChatPage";
 
-const View = () => {
+const AppView = () => {
   const { state, dispatch } = useContext(AppContext);
-  console.log("ttt111 ", state);
 
   return (
     <IonApp>
@@ -52,8 +51,8 @@ const View = () => {
           <IonTabs>
             <IonRouterOutlet>
               <Route path="/tab1" component={ChatTab} exact={true} />
-              <Route path="/tab2" component={Tab2} exact={true} />
-              <Route path="/tab3" component={Tab3} />
+              {/* <Route path="/tab2" component={Tab2} exact={true} />
+              <Route path="/tab3" component={Tab3} /> */}
               <Route path="/chatpage" component={ChatPage} exact={true} />
               <Route
                 path="/"
@@ -84,4 +83,4 @@ const View = () => {
     </IonApp>
   );
 };
-export default View;
+export default AppView;

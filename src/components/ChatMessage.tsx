@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { AppContext } from "../State";
+import { AppContext } from "../core/State";
 
 import { IonImg } from "@ionic/react";
-import Utility from "../Utility";
+import Utility from "../core/Utility";
 import "./ChatMessage.css";
 
 const ChatMessage = ({ chat }: any) => {

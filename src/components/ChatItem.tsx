@@ -8,9 +8,9 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 
-import { AppContext } from "../State";
+import { AppContext } from "../core/State";
 import { useHistory } from "react-router";
-import db from "../FireStore";
+import db from "../api/FireStore";
 
 const ChatItem = ({ contact }: any) => {
   const { state, dispatch } = useContext(AppContext);

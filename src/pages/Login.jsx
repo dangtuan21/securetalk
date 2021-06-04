@@ -11,10 +11,10 @@ import {
   IonLoading,
 } from "@ionic/react";
 
-import "./View.css";
+import "../theme/style.css";
 
-import db from "./FireStore";
-import { AppContext } from "./State";
+import db from "../api/FireStore";
+import { AppContext } from "../core/State";
 
 const Login = () => {
   const [passcode, setPasscode] = useState();

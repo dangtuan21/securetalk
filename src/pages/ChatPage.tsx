@@ -19,19 +19,14 @@ import {
   IonBackButton,
 } from "@ionic/react";
 
-import { AppContext } from "../State";
-import db from "../FireStore";
+import { AppContext } from "../core/State";
+import db from "../api/FireStore";
 import { sendSharp, happyOutline, linkOutline } from "ionicons/icons";
 
-import Utility from "../Utility";
+import Utility from "../core/Utility";
 import ChatMessage from "../components/ChatMessage";
 
-import {
-  Camera,
-  CameraResultType,
-  CameraSource,
-  Photo,
-} from "@capacitor/camera";
+import { Camera, CameraResultType, Photo } from "@capacitor/camera";
 
 const ChatPage = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -78,10 +73,6 @@ const ChatPage = () => {
       resultType: CameraResultType.Base64,
     });
 
-    let imageUrl = image.webPath;
-
-    console.log(image);
-
     await sendMessage("media", image.base64String);
   };
 
@@ -100,7 +91,7 @@ const ChatPage = () => {
         time: +Date.now(),
       };
       console.log("ttt mess", messageBody);
-      const send_response = await db.collection("messages").add(messageBody);
+      await db.collection("messages").add(messageBody);
       setMessage("");
     }
   };
@@ -111,7 +102,7 @@ const ChatPage = () => {
         <IonToolbar className="login-bar">
           <IonButtons slot="start">
             <IonBackButton />
-          </IonButtons>{" "}
+          </IonButtons>
           <IonTitle slot="end">{state.chattingWith.name}</IonTitle>
           <IonAvatar
             slot="end"

@@ -10,7 +10,7 @@ import {
   IonLabel,
 } from "@ionic/react";
 import "./ChatTab.css";
-import { AppContext } from "../State";
+import { AppContext } from "../core/State";
 import React, { useContext, useState } from "react";
 import ChatItem from "../components/ChatItem";
 const ChatTab = () => {
