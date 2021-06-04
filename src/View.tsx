@@ -16,7 +16,7 @@ import {
   IonContent,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Tab1 from "./pages/Tab1";
+import ChatTab from "./pages/ChatTab";
 import Tab2 from "./pages/Tab2";
 import Tab3 from "./pages/Tab3";
 import Login from "./Login";
@@ -51,7 +51,7 @@ const View = () => {
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
-              <Route path="/tab1" component={Tab1} exact={true} />
+              <Route path="/tab1" component={ChatTab} exact={true} />
               <Route path="/tab2" component={Tab2} exact={true} />
               <Route path="/tab3" component={Tab3} />
               <Route path="/chatpage" component={ChatPage} exact={true} />
@@ -66,14 +66,14 @@ const View = () => {
             ) : (
               <IonTabBar slot="top" className="menu-bar">
                 <IonTabButton tab="tab1" href="/tab1" className="tabButton">
-                  <IonLabel>CHATS</IonLabel>
+                  <IonLabel>Home</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="tab2" href="/tab2" className="tabButton">
+                {/* <IonTabButton tab="tab2" href="/tab2" className="tabButton">
                   <IonLabel>STATUS</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="tab3" href="/tab3" className="tabButton">
                   <IonLabel>CALLS</IonLabel>
-                </IonTabButton>
+                </IonTabButton> */}
               </IonTabBar>
             )}
           </IonTabs>

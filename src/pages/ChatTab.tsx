@@ -9,11 +9,11 @@ import {
   IonAvatar,
   IonLabel,
 } from "@ionic/react";
-import "./Tab1.css";
+import "./ChatTab.css";
 import { AppContext } from "../State";
 import React, { useContext, useState } from "react";
 import ChatItem from "../components/ChatItem";
-const Tab1 = () => {
+const ChatTab = () => {
   const { state, dispatch } = useContext(AppContext);
   console.log("ttt state", state);
 
@@ -30,4 +30,4 @@ const Tab1 = () => {
   );
 };
 
-export default Tab1;
+export default ChatTab;
