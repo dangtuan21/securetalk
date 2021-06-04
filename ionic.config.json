@@ -1,0 +1,7 @@
+{
+  "name": "securetalk",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
