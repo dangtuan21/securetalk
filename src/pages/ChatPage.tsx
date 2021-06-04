@@ -15,6 +15,8 @@ import {
   IonInput,
   useIonViewWillLeave,
   useIonViewDidEnter,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/react";
 
 import { AppContext } from "../State";
@@ -107,13 +109,16 @@ const ChatPage = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar className="login-bar">
+          <IonButtons slot="start">
+            <IonBackButton />
+          </IonButtons>{" "}
+          <IonTitle slot="end">{state.chattingWith.name}</IonTitle>
           <IonAvatar
-            slot="start"
+            slot="end"
             style={{ width: "40px", height: "40px", marginLeft: "10px" }}
           >
             <img src={state.chattingWith.avatar} alt="Profile" />
           </IonAvatar>
-          <IonTitle>{state.chattingWith.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="chat-page-content">
