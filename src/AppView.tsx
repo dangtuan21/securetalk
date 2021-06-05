@@ -19,7 +19,7 @@ import { IonReactRouter } from "@ionic/react-router";
 import ChatTab from "./pages/ChatTab";
 // import Tab2 from "./pages/Tab2";
 // import Tab3 from "./pages/Tab3";
-import Login from "./pages/Login";
+import Passcode from "./pages/Passcode";
 import "./theme/style.css";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -50,13 +50,11 @@ const AppView = () => {
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
-              <Route path="/tab1" component={ChatTab} exact={true} />
-              {/* <Route path="/tab2" component={Tab2} exact={true} />
-              <Route path="/tab3" component={Tab3} /> */}
+              <Route path="/home" component={ChatTab} exact={true} />
               <Route path="/chatpage" component={ChatPage} exact={true} />
               <Route
                 path="/"
-                render={() => <Redirect to="/tab1" />}
+                render={() => <Redirect to="/home" />}
                 exact={true}
               />
             </IonRouterOutlet>
@@ -78,7 +76,7 @@ const AppView = () => {
           </IonTabs>
         </IonReactRouter>
       ) : (
-        <Login />
+        <Passcode />
       )}
     </IonApp>
   );

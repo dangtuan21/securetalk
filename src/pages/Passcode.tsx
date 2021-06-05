@@ -16,9 +16,9 @@ import "../theme/style.css";
 import db from "../api/FireStore";
 import { AppContext } from "../core/State";
 
-const Login = () => {
-  const [passcode, setPasscode] = useState();
-  const [showLoading = false, setShowLoading] = useState();
+const Passcode = () => {
+  const [passcode, setPasscode]: [string, any] = useState("");
+  const [showLoading, setShowLoading]: [boolean, any] = useState(false);
 
   const { dispatch } = useContext(AppContext);
 
@@ -33,7 +33,7 @@ const Login = () => {
     fetchUser.forEach((doc) => {
       user = doc.data();
       user.id = doc.id;
-      console.log(user);
+      console.log("ttt user", user);
     });
 
     console.log(user);
@@ -83,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Passcode;
