@@ -12,7 +12,7 @@ import { AppContext } from "../core/State";
 import { useHistory } from "react-router";
 import firestoreDb from "../api/FireStore";
 
-const ChatItem = ({ friend }: any) => {
+const FriendItem = ({ friend }: any) => {
   const { state, dispatch } = useContext(AppContext);
   const [lastMessage, setLastMessage]: [any, any] = useState({});
   const [newMessageCount, setNewMessageCount]: [number, any] = useState(0);
@@ -86,4 +86,4 @@ const ChatItem = ({ friend }: any) => {
   );
 };
 
-export default ChatItem;
+export default FriendItem;

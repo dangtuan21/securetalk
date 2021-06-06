@@ -19,7 +19,7 @@ import {
   IonSearchbar,
   IonList,
 } from "@ionic/react";
-import "./ChatTab.css";
+import "./HomeTab.css";
 import { AppContext } from "../core/State";
 import React, { useContext } from "react";
 import ContactItem from "../components/ContactItem";

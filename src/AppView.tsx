@@ -10,7 +10,7 @@ import {
   IonTabs,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import ChatTab from "./pages/ChatTab";
+import HomeTab from "./pages/HomeTab";
 import ContactsTab from "./pages/ContactsTab";
 import Passcode from "./pages/Passcode";
 import SignUp from "./pages/SignUp";
@@ -49,7 +49,7 @@ const AppView = () => {
               render={() => <Redirect to="/home" />}
               exact={true}
             />
-            <Route path="/home" component={ChatTab} exact={true} />
+            <Route path="/home" component={HomeTab} exact={true} />
             <Route path="/contacts" component={ContactsTab} exact={true} />
             <Route path="/chatpage" component={ChatPage} exact={true} />
             <Route path="/passcode" component={Passcode} exact={true} />

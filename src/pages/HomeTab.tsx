@@ -9,11 +9,11 @@ import {
   IonAvatar,
   IonLabel,
 } from "@ionic/react";
-import "./ChatTab.css";
+import "./HomeTab.css";
 import { AppContext } from "../core/State";
 import React, { useContext, useState } from "react";
-import ChatItem from "../components/ChatItem";
-const ChatTab = () => {
+import FriendItem from "../components/FriendItem";
+const HomeTab = () => {
   const { state, dispatch } = useContext(AppContext);
 
   return (
@@ -21,7 +21,7 @@ const ChatTab = () => {
       <IonContent className="chat-screen">
         <IonList>
           {state.user.friends.map((friend: any) => (
-            <ChatItem friend={friend} key={friend.user_id} />
+            <FriendItem friend={friend} key={friend.user_id} />
           ))}
         </IonList>
       </IonContent>
@@ -29,4 +29,4 @@ const ChatTab = () => {
   );
 };
 
-export default ChatTab;
+export default HomeTab;
