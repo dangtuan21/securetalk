@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState } from "react";
 import {
   IonPage,
   IonHeader,
@@ -33,8 +33,6 @@ const ChatPage = () => {
   const [message, setMessage]: [string, any] = useState("");
   let [messages, setChatMessages]: [any[], any] = useState([]);
 
-  // let messageSubscription: any = useRef(null);
-
   const getMessages = async ({ channel1, channel2 }: any) => {
     return await fetchMessages({ channel1, channel2 });
   };
@@ -54,9 +52,6 @@ const ChatPage = () => {
       type: "setNoTabs",
       payload: false,
     });
-
-    //Unsubscribe
-    // messageSubscription();
   });
 
   const getImage = async () => {

@@ -21,10 +21,26 @@ import {
 } from "@ionic/react";
 import "./HomeTab.css";
 import { AppContext } from "../core/State";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ContactItem from "../components/ContactItem";
+import { fetchNotFriendContacts } from "../api/db-service";
+
 const ContactsTab = () => {
   const { state, dispatch } = useContext(AppContext);
+  let [contacts, setMessages]: [any[], any] = useState([]);
+
+  const getContacts = async (user: any) => {
+    return await fetchNotFriendContacts(user);
+  };
+
+  const refreshContactList = async () => {
+    contacts = await getContacts(state.user);
+    setMessages(contacts);
+  };
+
+  useIonViewDidEnter(async () => {
+    await refreshContactList();
+  });
 
   return (
     <IonPage>
@@ -36,8 +52,8 @@ const ContactsTab = () => {
 
       <IonContent className="chat-screen">
         <IonList>
-          {state.user.friends.map((friend: any) => (
-            <ContactItem friend={friend} key={friend.user_id} />
+          {contacts.map((contact: any) => (
+            <ContactItem contact={contact} key={contact.user_id} />
           ))}
         </IonList>
       </IonContent>
