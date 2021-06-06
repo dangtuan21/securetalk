@@ -42,6 +42,36 @@ export const signIn = async ({ email, password }: any) => {
   fetchUser.forEach((doc) => {
     user = doc.data();
   });
-  console.log(user);
   return user;
+};
+export const fetchMessages = async ({
+  channel1,
+  channel2,
+  limit = 0,
+  orderBy = "",
+}: any) => {
+  let prefetchData = await firestoreDb
+    .collection("messages")
+    .where("channel", "in", [channel1, channel2]);
+
+  if (orderBy) {
+    prefetchData = await prefetchData.orderBy("time", orderBy);
+  } else {
+    prefetchData = await prefetchData.orderBy("time");
+  }
+
+  let fetchData: any = {};
+  if (limit) {
+    fetchData = await prefetchData.limit(limit).get();
+  } else {
+    fetchData = await prefetchData.get();
+  }
+  const messages: any[] = [];
+  fetchData.forEach((doc: any) => {
+    messages.push(doc.data());
+  });
+  return messages;
+};
+export const sendMessageBody = async (messageBody: any) => {
+  await firestoreDb.collection("messages").add(messageBody);
 };

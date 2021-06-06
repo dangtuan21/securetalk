@@ -20,7 +20,7 @@ import {
 } from "@ionic/react";
 
 import { AppContext } from "../core/State";
-import firestoreDb from "../api/FireStore";
+import { fetchMessages, sendMessageBody } from "../api/db-service";
 import { sendSharp, happyOutline, linkOutline } from "ionicons/icons";
 
 import Utility from "../core/Utility";
@@ -31,29 +31,22 @@ import { Camera, CameraResultType, Photo } from "@capacitor/camera";
 const ChatPage = () => {
   const { state, dispatch } = useContext(AppContext);
   const [message, setMessage]: [string, any] = useState("");
-  const [chatMessages, setChatMessages]: [any[], any] = useState([]);
+  let [messages, setChatMessages]: [any[], any] = useState([]);
 
-  let messageSubscription: any = useRef(null);
+  // let messageSubscription: any = useRef(null);
 
-  useIonViewDidEnter(async () => {
+  const getMessages = async ({ channel1, channel2 }: any) => {
+    return await fetchMessages({ channel1, channel2 });
+  };
+
+  const refreshChatSession = async () => {
     let channel1 = `${state.user.user_id},${state.chattingWith.user_id}`;
     let channel2 = `${state.chattingWith.user_id},${state.user.user_id}`;
-
-    messageSubscription = await firestoreDb
-      .collection("messages")
-      .where("channel", "in", [channel1, channel2])
-      .orderBy("time")
-      .limit(100)
-      .onSnapshot(function (querySnapshot) {
-        const messages: any[] = [];
-        querySnapshot.forEach(function (doc) {
-          messages.push(doc.data());
-        });
-
-        setChatMessages(messages);
-
-        console.log(messages);
-      });
+    messages = await getMessages({ channel1, channel2 });
+    setChatMessages(messages);
+  };
+  useIonViewDidEnter(async () => {
+    await refreshChatSession();
   });
 
   useIonViewWillLeave(() => {
@@ -63,7 +56,7 @@ const ChatPage = () => {
     });
 
     //Unsubscribe
-    messageSubscription();
+    // messageSubscription();
   });
 
   const getImage = async () => {
@@ -90,8 +83,9 @@ const ChatPage = () => {
         file_url: file,
         time: +Date.now(),
       };
-      await firestoreDb.collection("messages").add(messageBody);
+      await sendMessageBody(messageBody);
       setMessage("");
+      await refreshChatSession();
     }
   };
 
@@ -112,7 +106,7 @@ const ChatPage = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="chat-page-content">
-        {chatMessages.map((chat: any) => (
+        {messages.map((chat: any) => (
           <ChatMessage key={chat.message_id} chat={chat} />
         ))}
       </IonContent>
