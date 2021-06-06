@@ -65,6 +65,12 @@ const SignIn = () => {
       type: "loadUser",
       payload: { user },
     });
+
+    dispatch({
+      type: "setNoTabs",
+      payload: false,
+    });
+
     setShowLoading(false);
 
     history.push("/home");

@@ -7,7 +7,7 @@ try {
 const initialState = {
   count: 0,
   user,
-  noTabs: false,
+  noTabs: true,
   chattingWith: {},
 };
 let reducer = (state: any, action: any) => {

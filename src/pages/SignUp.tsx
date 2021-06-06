@@ -19,8 +19,6 @@ import {
 
 import "../theme/style.css";
 
-// import { firebaseApp } from "../api/FireStore";
-
 import { signUp } from "../api/db-service";
 import { AppContext } from "../core/State";
 import { personCircle } from "ionicons/icons";
@@ -68,6 +66,12 @@ const SignUp = () => {
       type: "loadUser",
       payload: { user },
     });
+
+    dispatch({
+      type: "setNoTabs",
+      payload: false,
+    });
+
     setShowLoading(false);
 
     history.push("/home");
