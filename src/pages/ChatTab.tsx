@@ -15,14 +15,13 @@ import React, { useContext, useState } from "react";
 import ChatItem from "../components/ChatItem";
 const ChatTab = () => {
   const { state, dispatch } = useContext(AppContext);
-  console.log("ttt state", state);
 
   return (
     <IonPage>
       <IonContent className="chat-screen">
         <IonList>
-          {state.user.contacts.map((contact: any) => (
-            <ChatItem contact={contact} key={contact.user_id} />
+          {state.user.friends.map((friend: any) => (
+            <ChatItem friend={friend} key={friend.user_id} />
           ))}
         </IonList>
       </IonContent>

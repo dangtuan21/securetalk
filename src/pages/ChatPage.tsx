@@ -90,7 +90,6 @@ const ChatPage = () => {
         file_url: file,
         time: +Date.now(),
       };
-      console.log("ttt mess", messageBody);
       await firestoreDb.collection("messages").add(messageBody);
       setMessage("");
     }

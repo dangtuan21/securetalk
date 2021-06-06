@@ -6,13 +6,15 @@ import {
   IonLabel,
   IonBadge,
   useIonViewDidEnter,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
 
 import { AppContext } from "../core/State";
 import { useHistory } from "react-router";
 import firestoreDb from "../api/FireStore";
 
-const ChatItem = ({ friend }: any) => {
+const ContactItem = ({ friend }: any) => {
   const { state, dispatch } = useContext(AppContext);
   const [lastMessage, setLastMessage]: [any, any] = useState({});
   const [newMessageCount, setNewMessageCount]: [number, any] = useState(0);
@@ -56,34 +58,22 @@ const ChatItem = ({ friend }: any) => {
         }
       });
   });
-
-  const goToChat = () => {
-    dispatch({
-      type: "setNoTabs",
-      payload: true,
-    });
-    dispatch({
-      type: "setChattingWith",
-      payload: friend,
-    });
-    history.push("/chatpage");
+  const addFriend = async (type: string = "text", file: string | undefined) => {
+    console.log("ttt");
   };
   return (
-    <IonItem onClick={() => goToChat()}>
+    <IonItem>
       <IonAvatar slot="start">
         <img src={profile_image} alt="icon" />
       </IonAvatar>
       <IonLabel>
         <h2>{friend.name}</h2>
-        <p>{lastMessage.message || "..."}</p>
       </IonLabel>
-      {newMessageCount > 0 && (
-        <IonBadge color="success" slot="end">
-          {newMessageCount}
-        </IonBadge>
-      )}
+      <IonBadge color="medium" slot="end" onClick={() => addFriend("text", "")}>
+        Add
+      </IonBadge>
     </IonItem>
   );
 };
 
-export default ChatItem;
+export default ContactItem;

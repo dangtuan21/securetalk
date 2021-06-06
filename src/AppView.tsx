@@ -11,6 +11,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import ChatTab from "./pages/ChatTab";
+import ContactsTab from "./pages/ContactsTab";
 import Passcode from "./pages/Passcode";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
@@ -49,6 +50,7 @@ const AppView = () => {
               exact={true}
             />
             <Route path="/home" component={ChatTab} exact={true} />
+            <Route path="/contacts" component={ContactsTab} exact={true} />
             <Route path="/chatpage" component={ChatPage} exact={true} />
             <Route path="/passcode" component={Passcode} exact={true} />
             <Route path="/signup" component={SignUp} exact={true} />
@@ -58,13 +60,17 @@ const AppView = () => {
             <IonTabBar></IonTabBar>
           ) : (
             <IonTabBar slot="top" className="menu-bar">
-              <IonTabButton tab="tab1" href="/tab1" className="tabButton">
+              <IonTabButton tab="home" href="/home" className="tabButton">
                 <IonLabel>Home</IonLabel>
               </IonTabButton>
-              {/* <IonTabButton tab="tab2" href="/tab2" className="tabButton">
-                  <IonLabel>STATUS</IonLabel>
-                </IonTabButton>
-                <IonTabButton tab="tab3" href="/tab3" className="tabButton">
+              <IonTabButton
+                tab="contacts"
+                href="/contacts"
+                className="tabButton"
+              >
+                <IonLabel>Contacts</IonLabel>
+              </IonTabButton>
+              {/* <IonTabButton tab="tab3" href="/tab3" className="tabButton">
                   <IonLabel>CALLS</IonLabel>
                 </IonTabButton> */}
             </IonTabBar>

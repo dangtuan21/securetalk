@@ -33,10 +33,7 @@ const Login = () => {
     fetchUser.forEach((doc) => {
       user = doc.data();
       user.id = doc.id;
-      console.log("ttt user", user);
     });
-    debugger;
-    console.log(user);
 
     dispatch({
       type: "loadUser",

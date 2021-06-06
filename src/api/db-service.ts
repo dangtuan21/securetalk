@@ -13,7 +13,7 @@ export const signUp = async ({ name, email, password }: any) => {
     avatar:
       "https://images.pexels.com/photos/5968120/pexels-photo-5968120.jpeg",
     last_seen: "0",
-    contacts: [
+    friends: [
       {
         user_id: "125489007",
         name: "John Doe", //ttt fake
@@ -40,7 +40,6 @@ export const signIn = async ({ email, password }: any) => {
     .get();
   let user;
   fetchUser.forEach((doc) => {
-    debugger;
     user = doc.data();
   });
   console.log(user);

@@ -60,7 +60,6 @@ const SignIn = () => {
 
     setShowLoading(true);
 
-    debugger;
     const user = await signIn({ email, password });
     dispatch({
       type: "loadUser",
