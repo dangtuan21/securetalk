@@ -10,7 +10,7 @@ import {
 
 import { AppContext } from "../core/State";
 import { useHistory } from "react-router";
-import db from "../api/FireStore";
+import firestoreDb from "../api/FireStore";
 
 const ChatItem = ({ contact }: any) => {
   const { state, dispatch } = useContext(AppContext);
@@ -38,7 +38,7 @@ const ChatItem = ({ contact }: any) => {
     let channel1 = `${state.user.user_id},${contact.user_id}`;
     let channel2 = `${contact.user_id},${state.user.user_id}`;
 
-    messageSubscription = await db
+    messageSubscription = await firestoreDb
       .collection("messages")
       .where("channel", "in", [channel1, channel2])
       .orderBy("time", "desc")

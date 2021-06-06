@@ -16,7 +16,7 @@ import "../theme/style.css";
 import db from "../api/FireStore";
 import { AppContext } from "../core/State";
 
-const Passcode = () => {
+const Login = () => {
   const [passcode, setPasscode]: [string, any] = useState("");
   const [showLoading, setShowLoading]: [boolean, any] = useState(false);
 
@@ -35,7 +35,7 @@ const Passcode = () => {
       user.id = doc.id;
       console.log("ttt user", user);
     });
-
+    debugger;
     console.log(user);
 
     dispatch({
@@ -83,4 +83,4 @@ const Passcode = () => {
   );
 };
 
-export default Passcode;
+export default Login;

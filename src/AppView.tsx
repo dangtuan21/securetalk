@@ -1,25 +1,19 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { AppContext } from "./core/State";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
-  IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  IonToolbar,
-  IonTitle,
-  IonPage,
-  IonHeader,
-  IonContent,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import ChatTab from "./pages/ChatTab";
-// import Tab2 from "./pages/Tab2";
-// import Tab3 from "./pages/Tab3";
 import Passcode from "./pages/Passcode";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import "./theme/style.css";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -46,38 +40,37 @@ const AppView = () => {
 
   return (
     <IonApp>
-      {state.user ? (
-        <IonReactRouter>
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/home" component={ChatTab} exact={true} />
-              <Route path="/chatpage" component={ChatPage} exact={true} />
-              <Route
-                path="/"
-                render={() => <Redirect to="/home" />}
-                exact={true}
-              />
-            </IonRouterOutlet>
-            {state.noTabs ? (
-              <IonTabBar></IonTabBar>
-            ) : (
-              <IonTabBar slot="top" className="menu-bar">
-                <IonTabButton tab="tab1" href="/tab1" className="tabButton">
-                  <IonLabel>Home</IonLabel>
-                </IonTabButton>
-                {/* <IonTabButton tab="tab2" href="/tab2" className="tabButton">
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route
+              path="/"
+              render={() => <Redirect to="/home" />}
+              exact={true}
+            />
+            <Route path="/home" component={ChatTab} exact={true} />
+            <Route path="/chatpage" component={ChatPage} exact={true} />
+            <Route path="/passcode" component={Passcode} exact={true} />
+            <Route path="/signup" component={SignUp} exact={true} />
+            <Route path="/signin" component={SignIn} exact={true} />
+          </IonRouterOutlet>
+          {state.noTabs ? (
+            <IonTabBar></IonTabBar>
+          ) : (
+            <IonTabBar slot="top" className="menu-bar">
+              <IonTabButton tab="tab1" href="/tab1" className="tabButton">
+                <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              {/* <IonTabButton tab="tab2" href="/tab2" className="tabButton">
                   <IonLabel>STATUS</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="tab3" href="/tab3" className="tabButton">
                   <IonLabel>CALLS</IonLabel>
                 </IonTabButton> */}
-              </IonTabBar>
-            )}
-          </IonTabs>
-        </IonReactRouter>
-      ) : (
-        <Passcode />
-      )}
+            </IonTabBar>
+          )}
+        </IonTabs>
+      </IonReactRouter>
     </IonApp>
   );
 };

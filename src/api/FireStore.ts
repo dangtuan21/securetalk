@@ -1,5 +1,7 @@
 import firebase from "firebase";
 import dbConfig from "./db-config.json";
-const db = firebase.initializeApp(dbConfig).firestore();
+const firebaseApp = firebase.initializeApp(dbConfig);
+const firestoreDb = firebaseApp.firestore();
 
-export default db;
+export { firebaseApp, firestoreDb };
+export default firestoreDb;

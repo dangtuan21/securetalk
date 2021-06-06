@@ -20,7 +20,7 @@ import {
 } from "@ionic/react";
 
 import { AppContext } from "../core/State";
-import db from "../api/FireStore";
+import firestoreDb from "../api/FireStore";
 import { sendSharp, happyOutline, linkOutline } from "ionicons/icons";
 
 import Utility from "../core/Utility";
@@ -39,7 +39,7 @@ const ChatPage = () => {
     let channel1 = `${state.user.user_id},${state.chattingWith.user_id}`;
     let channel2 = `${state.chattingWith.user_id},${state.user.user_id}`;
 
-    messageSubscription = await db
+    messageSubscription = await firestoreDb
       .collection("messages")
       .where("channel", "in", [channel1, channel2])
       .orderBy("time")
@@ -91,7 +91,7 @@ const ChatPage = () => {
         time: +Date.now(),
       };
       console.log("ttt mess", messageBody);
-      await db.collection("messages").add(messageBody);
+      await firestoreDb.collection("messages").add(messageBody);
       setMessage("");
     }
   };
