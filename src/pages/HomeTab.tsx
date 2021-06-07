@@ -21,7 +21,7 @@ const HomeTab = () => {
       <IonContent className="chat-screen">
         <IonList>
           {state.user.friends.map((friend: any) => (
-            <FriendItem friend={friend} key={friend.user_id} />
+            <FriendItem friend={friend} key={friend.authId} />
           ))}
         </IonList>
       </IonContent>

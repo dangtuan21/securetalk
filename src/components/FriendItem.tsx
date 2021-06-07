@@ -33,8 +33,8 @@ const FriendItem = ({ friend }: any) => {
     "https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?k=6&m=476085198&s=612x612&w=0&h=5cDQxXHFzgyz8qYeBQu2gCZq1_TN0z40e_8ayzne0X0=";
 
   useIonViewDidEnter(async () => {
-    let channel1 = `${state.user.user_id},${friend.user_id}`;
-    let channel2 = `${friend.user_id},${state.user.user_id}`;
+    let channel1 = `${state.user.authId},${friend.authId}`;
+    let channel2 = `${friend.authId},${state.user.authId}`;
 
     const limit = 1;
     const orderBy = "desc";

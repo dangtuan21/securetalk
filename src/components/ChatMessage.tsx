@@ -14,7 +14,7 @@ const ChatMessage = ({ chat }: any) => {
 
   let messageStyles: any = {};
 
-  if (state.user.user_id === chat.sent_by) {
+  if (state.user.authId === chat.sent_by) {
     messageStyles.backgroundColor = "#dcf8c6";
     messageStyles.float = "right";
   }

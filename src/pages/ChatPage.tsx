@@ -38,8 +38,8 @@ const ChatPage = () => {
   };
 
   const refreshChatSession = async () => {
-    let channel1 = `${state.user.user_id},${state.chattingWith.user_id}`;
-    let channel2 = `${state.chattingWith.user_id},${state.user.user_id}`;
+    let channel1 = `${state.user.authId},${state.chattingWith.authId}`;
+    let channel2 = `${state.chattingWith.authId},${state.user.authId}`;
     messages = await getMessages({ channel1, channel2 });
     setChatMessages(messages);
   };
@@ -71,8 +71,8 @@ const ChatPage = () => {
     if (message || type === "media") {
       let messageBody = {
         message_id: Utility.genRandom(),
-        sent_by: state.user.user_id,
-        channel: `${state.user.user_id},${state.chattingWith.user_id}`,
+        sent_by: state.user.authId,
+        channel: `${state.user.authId},${state.chattingWith.authId}`,
         type: type,
         message: message || "",
         file_url: file,

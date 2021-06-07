@@ -6,10 +6,10 @@ export const signUp = async ({ name, email, password }: any) => {
     .auth()
     .createUserWithEmailAndPassword(email, password);
   const signedUpUser: any = resp.user;
-  const userUid = uuid();
+  const userId = uuid();
 
   let newUser: any = {
-    user_id: signedUpUser.uid,
+    authId: signedUpUser.uid,
     name,
     email,
     passcode: "0000",
@@ -17,11 +17,11 @@ export const signUp = async ({ name, email, password }: any) => {
       "https://images.pexels.com/photos/5968120/pexels-photo-5968120.jpeg",
     last_seen: "0",
     friends: [],
-    uid: userUid,
+    userId,
   };
 
   // Create an initial document
-  const frankDocRef = await firestoreDb.collection("users").doc(userUid);
+  const frankDocRef = await firestoreDb.collection("users").doc(userId);
   await frankDocRef.set(newUser);
   return newUser;
 };
@@ -90,11 +90,10 @@ export const fetchNotFriendContacts = async (user: any) => {
 };
 
 export const addFriendToUser = async (user: any, friend: any) => {
-  debugger;
   const docRef = await firestoreDb.collection("users");
   const friends = [...user.friends];
   friends.push(friend);
-  await docRef.doc(user.uid).update({ friends: friends });
+  await docRef.doc(user.userId).update({ friends: friends });
 };
 
 export const sendMessageBody = async (messageBody: any) => {
