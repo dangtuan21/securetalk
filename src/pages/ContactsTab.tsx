@@ -53,7 +53,7 @@ const ContactsTab = () => {
       <IonContent className="chat-screen">
         <IonList>
           {contacts.map((contact: any) => (
-            <ContactItem contact={contact} key={contact.authId} />
+            <ContactItem contact={contact} key={contact.userId} />
           ))}
         </IonList>
       </IonContent>

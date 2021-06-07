@@ -25,6 +25,7 @@ import { sendSharp, happyOutline, linkOutline } from "ionicons/icons";
 
 import Utility from "../core/Utility";
 import ChatMessage from "../components/ChatMessage";
+import { uuid } from "uuidv4";
 
 import { Camera, CameraResultType, Photo } from "@capacitor/camera";
 
@@ -38,8 +39,8 @@ const ChatPage = () => {
   };
 
   const refreshChatSession = async () => {
-    let channel1 = `${state.user.authId},${state.chattingWith.authId}`;
-    let channel2 = `${state.chattingWith.authId},${state.user.authId}`;
+    let channel1 = `${state.user.userId},${state.chattingWith.userId}`;
+    let channel2 = `${state.chattingWith.userId},${state.user.userId}`;
     messages = await getMessages({ channel1, channel2 });
     setChatMessages(messages);
   };
@@ -70,9 +71,9 @@ const ChatPage = () => {
   ) => {
     if (message || type === "media") {
       let messageBody = {
-        message_id: Utility.genRandom(),
-        sent_by: state.user.authId,
-        channel: `${state.user.authId},${state.chattingWith.authId}`,
+        messageId: uuid(),
+        sent_by: state.user.userId,
+        channel: `${state.user.userId},${state.chattingWith.userId}`,
         type: type,
         message: message || "",
         file_url: file,
@@ -102,7 +103,7 @@ const ChatPage = () => {
       </IonHeader>
       <IonContent className="chat-page-content">
         {messages.map((chat: any) => (
-          <ChatMessage key={chat.message_id} chat={chat} />
+          <ChatMessage key={chat.messageId} chat={chat} />
         ))}
       </IonContent>
 

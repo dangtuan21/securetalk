@@ -14,7 +14,7 @@ const ContactItem = ({ contact }: any) => {
   );
 
   useEffect(() => {
-    if (lastMessage.message_id !== previousLastMessage.message_id) {
+    if (lastMessage.messageId !== previousLastMessage.messageId) {
       setNewMessageCount(newMessageCount + 1);
     }
   }, [lastMessage]);

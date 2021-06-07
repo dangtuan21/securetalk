@@ -20,9 +20,8 @@ export const signUp = async ({ name, email, password }: any) => {
     userId,
   };
 
-  // Create an initial document
-  const frankDocRef = await firestoreDb.collection("users").doc(userId);
-  await frankDocRef.set(newUser);
+  const docRef = await firestoreDb.collection("users").doc(userId);
+  await docRef.set(newUser);
   return newUser;
 };
 
@@ -97,5 +96,8 @@ export const addFriendToUser = async (user: any, friend: any) => {
 };
 
 export const sendMessageBody = async (messageBody: any) => {
-  await firestoreDb.collection("messages").add(messageBody);
+  const docRef = await firestoreDb
+    .collection("messages")
+    .doc(messageBody.messageId);
+  await docRef.set(messageBody);
 };
