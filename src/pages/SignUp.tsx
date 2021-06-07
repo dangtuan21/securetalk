@@ -19,7 +19,7 @@ import {
 
 import "../theme/style.css";
 
-import { signUp } from "../api/db-service";
+import { signUp } from "../api/DbServices";
 import { AppContext } from "../core/State";
 import { personCircle } from "ionicons/icons";
 import { useHistory } from "react-router";

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   IonPage,
   IonHeader,
@@ -20,10 +20,9 @@ import {
 } from "@ionic/react";
 
 import { AppContext } from "../core/State";
-import { fetchMessages, sendMessageBody } from "../api/db-service";
+import { fetchMessages, sendMessageBody } from "../api/DbServices";
 import { sendSharp, happyOutline, linkOutline } from "ionicons/icons";
 
-import Utility from "../core/Utility";
 import ChatMessage from "../components/ChatMessage";
 import { uuid } from "uuidv4";
 
@@ -33,19 +32,23 @@ const ChatPage = () => {
   const { state, dispatch } = useContext(AppContext);
   const [message, setMessage]: [string, any] = useState("");
   let [messages, setChatMessages]: [any[], any] = useState([]);
+  let messageSubscription: any = useRef(null);
 
-  const getMessages = async ({ channel1, channel2 }: any) => {
-    return await fetchMessages({ channel1, channel2 });
+  const onSnapshotCB = (querySnapshot: any) => {
+    const messages: any[] = [];
+    querySnapshot.forEach(function (doc: any) {
+      messages.push(doc.data());
+    });
+    setChatMessages(messages);
   };
-
   const refreshChatSession = async () => {
     let channel1 = `${state.user.userId},${state.chattingWith.userId}`;
     let channel2 = `${state.chattingWith.userId},${state.user.userId}`;
-    messages = await getMessages({ channel1, channel2 });
-    setChatMessages(messages);
+    return await fetchMessages({ channel1, channel2, onSnapshotCB });
   };
   useIonViewDidEnter(async () => {
-    await refreshChatSession();
+    messageSubscription.current = await refreshChatSession();
+    console.log("messageSubscription unscribed");
   });
 
   useIonViewWillLeave(() => {
@@ -53,6 +56,8 @@ const ChatPage = () => {
       type: "setNoTabs",
       payload: false,
     });
+
+    messageSubscription.current();
   });
 
   const getImage = async () => {
@@ -81,7 +86,6 @@ const ChatPage = () => {
       };
       await sendMessageBody(messageBody);
       setMessage("");
-      await refreshChatSession();
     }
   };
 

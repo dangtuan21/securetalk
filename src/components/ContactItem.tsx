@@ -3,7 +3,7 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import { IonItem, IonAvatar, IonLabel, IonBadge } from "@ionic/react";
 
 import { AppContext } from "../core/State";
-import { addFriendToUser } from "../api/db-service";
+import { addFriendToUser } from "../api/DbServices";
 
 const ContactItem = ({ contact }: any) => {
   const { state, dispatch } = useContext(AppContext);

@@ -23,7 +23,7 @@ import "./HomeTab.css";
 import { AppContext } from "../core/State";
 import React, { useContext, useState } from "react";
 import ContactItem from "../components/ContactItem";
-import { fetchNotFriendContacts } from "../api/db-service";
+import { fetchNotFriendContacts } from "../api/DbServices";
 
 const ContactsTab = () => {
   const { state, dispatch } = useContext(AppContext);

@@ -46,6 +46,7 @@ export const fetchMessages = async ({
   channel2,
   limit = 0,
   orderBy = "",
+  onSnapshotCB,
 }: any) => {
   let prefetchData = await firestoreDb
     .collection("messages")
@@ -59,15 +60,12 @@ export const fetchMessages = async ({
 
   let fetchData: any = {};
   if (limit) {
-    fetchData = await prefetchData.limit(limit).get();
+    fetchData = await prefetchData.limit(limit).onSnapshot(onSnapshotCB);
   } else {
-    fetchData = await prefetchData.get();
+    fetchData = await prefetchData.onSnapshot(onSnapshotCB);
   }
-  const messages: any[] = [];
-  fetchData.forEach((doc: any) => {
-    messages.push(doc.data());
-  });
-  return messages;
+
+  return fetchData;
 };
 
 export const fetchNotFriendContacts = async (user: any) => {

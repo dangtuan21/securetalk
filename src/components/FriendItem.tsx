@@ -10,7 +10,7 @@ import {
 
 import { AppContext } from "../core/State";
 import { useHistory } from "react-router";
-import { fetchMessages } from "../api/db-service";
+import { fetchMessages } from "../api/DbServices";
 
 const FriendItem = ({ friend }: any) => {
   const { state, dispatch } = useContext(AppContext);
