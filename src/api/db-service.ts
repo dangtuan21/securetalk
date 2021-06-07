@@ -1,11 +1,14 @@
 import { firebaseApp, firestoreDb } from "./FireStore";
+import { uuid } from "uuidv4";
+
 export const signUp = async ({ name, email, password }: any) => {
   const resp = await firebaseApp
     .auth()
     .createUserWithEmailAndPassword(email, password);
-
   const signedUpUser: any = resp.user;
-  const newUser = {
+  const userUid = uuid();
+
+  let newUser: any = {
     user_id: signedUpUser.uid,
     name,
     email,
@@ -13,18 +16,13 @@ export const signUp = async ({ name, email, password }: any) => {
     avatar:
       "https://images.pexels.com/photos/5968120/pexels-photo-5968120.jpeg",
     last_seen: "0",
-    friends: [
-      {
-        user_id: "125489007",
-        name: "John Doe", //ttt fake
-        avatar:
-          "https://images.pexels.com/photos/208139/pexels-photo-208139.jpeg",
-      },
-    ],
+    friends: [],
+    uid: userUid,
   };
 
-  await firestoreDb.collection("users").add(newUser);
-
+  // Create an initial document
+  const frankDocRef = await firestoreDb.collection("users").doc(userUid);
+  await frankDocRef.set(newUser);
   return newUser;
 };
 
@@ -74,10 +72,11 @@ export const fetchMessages = async ({
 };
 
 export const fetchNotFriendContacts = async (user: any) => {
-  const emails = user.friends.map((item: any) => item.email);
+  //  find users which does not exist in user.friends
+  let emails = user.friends.map((item: any) => item.email);
+  emails = emails || [];
   emails.push(user.email);
 
-  //  find users which does not exist in user.friends
   let fetchData = await firestoreDb
     .collection("users")
     .where("email", "not-in", emails)
@@ -91,12 +90,11 @@ export const fetchNotFriendContacts = async (user: any) => {
 };
 
 export const addFriendToUser = async (user: any, friend: any) => {
+  debugger;
   const docRef = await firestoreDb.collection("users");
   const friends = [...user.friends];
   friends.push(friend);
-  docRef.doc(user.user_id).update({ friends: friends });
-  // .then((_) => print("Success"))
-  // .catchError((error) => print("Failed: $error"));
+  await docRef.doc(user.uid).update({ friends: friends });
 };
 
 export const sendMessageBody = async (messageBody: any) => {
